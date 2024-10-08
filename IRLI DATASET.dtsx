@@ -1,0 +1,949 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="6/6/2024 9:20:23 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DESKTOP-IF1PD5O"
+  DTS:CreatorName="DESKTOP-IF1PD5O\Mark Ouma"
+  DTS:DTSID="{8BF5B667-F0BB-4CBE-8A2F-B0DC450FC25B}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5467.0"
+  DTS:LocaleID="2057"
+  DTS:ObjectName="IRLI DATASET"
+  DTS:PackageType="5"
+  DTS:VersionBuild="5"
+  DTS:VersionGUID="{47261C84-8BB4-43FA-96DF-37FD0420A6AC}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[LocalHost.ILRI DB]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{6E144CDA-DDED-49BF-BD4F-8F05F49AF56D}"
+      DTS:ObjectName="LocalHost.ILRI DB">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=.;Initial Catalog=ILRI DB;Provider=SQLOLEDB.1;Integrated Security=SSPI;Application Name=SSIS-IRLI DATASET-{6E144CDA-DDED-49BF-BD4F-8F05F49AF56D}LocalHost.ILRI DB;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Sequence Container"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{B4D60E21-2312-4F77-9FFF-DA18FCE77528}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Sequence Container">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\IRLI Data Source"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{F3E4CF65-2F6A-45FC-8451-C24FE46D8B27}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="IRLI Data Source"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Sequence Container\IRLI Data Source\Derived Column"
+                  componentClassID="Microsoft.DerivedColumn"
+                  contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+                  name="Derived Column"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\Sequence Container\IRLI Data Source\Derived Column.Inputs[Derived Column Input]"
+                      description="Input to the Derived Column Transformation"
+                      name="Derived Column Input">
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\IRLI Data Source\Derived Column.Outputs[Derived Column Output]"
+                      description="Default Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      name="Derived Column Output"
+                      synchronousInputId="Package\Sequence Container\IRLI Data Source\Derived Column.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\IRLI Data Source\Derived Column.Outputs[Derived Column Output].Columns[LoadDate]"
+                          dataType="dbTimeStamp"
+                          errorOrTruncationOperation="Computation"
+                          errorRowDisposition="FailComponent"
+                          lineageId="Package\Sequence Container\IRLI Data Source\Derived Column.Outputs[Derived Column Output].Columns[LoadDate]"
+                          name="LoadDate"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Expression"
+                              name="Expression">[GETDATE]()</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Friendly Expression"
+                              expressionType="Notify"
+                              name="FriendlyExpression">GETDATE()</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Sequence Container\IRLI Data Source\Derived Column.Outputs[Derived Column Error Output]"
+                      description="Error Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Derived Column Error Output"
+                      synchronousInputId="Package\Sequence Container\IRLI Data Source\Derived Column.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\IRLI Data Source\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\IRLI Data Source\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container\IRLI Data Source\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\IRLI Data Source\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Sequence Container\IRLI Data Source\ILRI DATASET"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="ILRI DATASET"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[ILRI DATASET]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Sequence Container\IRLI Data Source\ILRI DATASET.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[LocalHost.ILRI DB]"
+                      connectionManagerRefId="Package.ConnectionManagers[LocalHost.ILRI DB]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Sequence Container\IRLI Data Source\ILRI DATASET.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Sequence Container\IRLI Data Source\ILRI DATASET.Inputs[OLE DB Destination Input].Columns[EstimatedSalary]"
+                          cachedDataType="wstr"
+                          cachedLength="255"
+                          cachedName="EstimatedSalary"
+                          externalMetadataColumnId="Package\Sequence Container\IRLI Data Source\ILRI DATASET.Inputs[OLE DB Destination Input].ExternalColumns[EstimatedSalary]"
+                          lineageId="Package\Sequence Container\IRLI Data Source\IRLI CSV SOURCE.Outputs[Flat File Source Output].Columns[EstimatedSalary]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\IRLI Data Source\ILRI DATASET.Inputs[OLE DB Destination Input].Columns[Loan type]"
+                          cachedDataType="wstr"
+                          cachedLength="255"
+                          cachedName="Loan type"
+                          externalMetadataColumnId="Package\Sequence Container\IRLI Data Source\ILRI DATASET.Inputs[OLE DB Destination Input].ExternalColumns[Loan type]"
+                          lineageId="Package\Sequence Container\IRLI Data Source\IRLI CSV SOURCE.Outputs[Flat File Source Output].Columns[Loan type]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\IRLI Data Source\ILRI DATASET.Inputs[OLE DB Destination Input].Columns[LoanStatus]"
+                          cachedDataType="wstr"
+                          cachedLength="255"
+                          cachedName="LoanStatus"
+                          externalMetadataColumnId="Package\Sequence Container\IRLI Data Source\ILRI DATASET.Inputs[OLE DB Destination Input].ExternalColumns[LoanStatus]"
+                          lineageId="Package\Sequence Container\IRLI Data Source\IRLI CSV SOURCE.Outputs[Flat File Source Output].Columns[LoanStatus]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\IRLI Data Source\ILRI DATASET.Inputs[OLE DB Destination Input].Columns[LoanTerm]"
+                          cachedDataType="wstr"
+                          cachedLength="255"
+                          cachedName="LoanTerm"
+                          externalMetadataColumnId="Package\Sequence Container\IRLI Data Source\ILRI DATASET.Inputs[OLE DB Destination Input].ExternalColumns[LoanTerm]"
+                          lineageId="Package\Sequence Container\IRLI Data Source\IRLI CSV SOURCE.Outputs[Flat File Source Output].Columns[LoanTerm]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\IRLI Data Source\ILRI DATASET.Inputs[OLE DB Destination Input].Columns[Category]"
+                          cachedDataType="wstr"
+                          cachedLength="255"
+                          cachedName="Category"
+                          externalMetadataColumnId="Package\Sequence Container\IRLI Data Source\ILRI DATASET.Inputs[OLE DB Destination Input].ExternalColumns[Category]"
+                          lineageId="Package\Sequence Container\IRLI Data Source\IRLI CSV SOURCE.Outputs[Flat File Source Output].Columns[Category]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\IRLI Data Source\ILRI DATASET.Inputs[OLE DB Destination Input].Columns[Loan Approved]"
+                          cachedDataType="r8"
+                          cachedName="Loan Approved"
+                          externalMetadataColumnId="Package\Sequence Container\IRLI Data Source\ILRI DATASET.Inputs[OLE DB Destination Input].ExternalColumns[Loan Approved]"
+                          lineageId="Package\Sequence Container\IRLI Data Source\IRLI CSV SOURCE.Outputs[Flat File Source Output].Columns[Loan Approved]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\IRLI Data Source\ILRI DATASET.Inputs[OLE DB Destination Input].Columns[Loan Repaid]"
+                          cachedDataType="r8"
+                          cachedName="Loan Repaid"
+                          externalMetadataColumnId="Package\Sequence Container\IRLI Data Source\ILRI DATASET.Inputs[OLE DB Destination Input].ExternalColumns[Loan Repaid]"
+                          lineageId="Package\Sequence Container\IRLI Data Source\IRLI CSV SOURCE.Outputs[Flat File Source Output].Columns[Loan Repaid]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\IRLI Data Source\ILRI DATASET.Inputs[OLE DB Destination Input].Columns[Loan Duration(Months)]"
+                          cachedDataType="wstr"
+                          cachedLength="255"
+                          cachedName="Loan Duration(Months)"
+                          externalMetadataColumnId="Package\Sequence Container\IRLI Data Source\ILRI DATASET.Inputs[OLE DB Destination Input].ExternalColumns[Loan Duration(Months)]"
+                          lineageId="Package\Sequence Container\IRLI Data Source\IRLI CSV SOURCE.Outputs[Flat File Source Output].Columns[Loan Duration(Months)]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\IRLI Data Source\ILRI DATASET.Inputs[OLE DB Destination Input].Columns[Interest Rate]"
+                          cachedDataType="r8"
+                          cachedName="Interest Rate"
+                          externalMetadataColumnId="Package\Sequence Container\IRLI Data Source\ILRI DATASET.Inputs[OLE DB Destination Input].ExternalColumns[Interest Rate]"
+                          lineageId="Package\Sequence Container\IRLI Data Source\IRLI CSV SOURCE.Outputs[Flat File Source Output].Columns[Interest Rate]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\IRLI Data Source\ILRI DATASET.Inputs[OLE DB Destination Input].Columns[Loan_inception date]"
+                          cachedDataType="date"
+                          cachedName="Loan_inception date"
+                          externalMetadataColumnId="Package\Sequence Container\IRLI Data Source\ILRI DATASET.Inputs[OLE DB Destination Input].ExternalColumns[Loan_inception date]"
+                          lineageId="Package\Sequence Container\IRLI Data Source\IRLI CSV SOURCE.Outputs[Flat File Source Output].Columns[Loan_inception date]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\IRLI Data Source\ILRI DATASET.Inputs[OLE DB Destination Input].Columns[Months since last delinquent]"
+                          cachedDataType="wstr"
+                          cachedLength="255"
+                          cachedName="Months since last delinquent"
+                          externalMetadataColumnId="Package\Sequence Container\IRLI Data Source\ILRI DATASET.Inputs[OLE DB Destination Input].ExternalColumns[Months since last delinquent]"
+                          lineageId="Package\Sequence Container\IRLI Data Source\IRLI CSV SOURCE.Outputs[Flat File Source Output].Columns[Months since last delinquent]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\IRLI Data Source\ILRI DATASET.Inputs[OLE DB Destination Input].Columns[CustomerId]"
+                          cachedDataType="wstr"
+                          cachedLength="255"
+                          cachedName="CustomerId"
+                          externalMetadataColumnId="Package\Sequence Container\IRLI Data Source\ILRI DATASET.Inputs[OLE DB Destination Input].ExternalColumns[CustomerId]"
+                          lineageId="Package\Sequence Container\IRLI Data Source\IRLI CSV SOURCE.Outputs[Flat File Source Output].Columns[CustomerId]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\IRLI Data Source\ILRI DATASET.Inputs[OLE DB Destination Input].Columns[LoadDate]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="LoadDate"
+                          externalMetadataColumnId="Package\Sequence Container\IRLI Data Source\ILRI DATASET.Inputs[OLE DB Destination Input].ExternalColumns[LoadDate]"
+                          lineageId="Package\Sequence Container\IRLI Data Source\Derived Column.Outputs[Derived Column Output].Columns[LoadDate]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\IRLI Data Source\ILRI DATASET.Inputs[OLE DB Destination Input].ExternalColumns[EstimatedSalary]"
+                          dataType="wstr"
+                          length="255"
+                          name="EstimatedSalary" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\IRLI Data Source\ILRI DATASET.Inputs[OLE DB Destination Input].ExternalColumns[Loan type]"
+                          dataType="wstr"
+                          length="255"
+                          name="Loan type" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\IRLI Data Source\ILRI DATASET.Inputs[OLE DB Destination Input].ExternalColumns[LoanStatus]"
+                          dataType="wstr"
+                          length="255"
+                          name="LoanStatus" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\IRLI Data Source\ILRI DATASET.Inputs[OLE DB Destination Input].ExternalColumns[LoanTerm]"
+                          dataType="wstr"
+                          length="255"
+                          name="LoanTerm" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\IRLI Data Source\ILRI DATASET.Inputs[OLE DB Destination Input].ExternalColumns[Category]"
+                          dataType="wstr"
+                          length="255"
+                          name="Category" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\IRLI Data Source\ILRI DATASET.Inputs[OLE DB Destination Input].ExternalColumns[Loan Approved]"
+                          dataType="r8"
+                          name="Loan Approved" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\IRLI Data Source\ILRI DATASET.Inputs[OLE DB Destination Input].ExternalColumns[Loan Repaid]"
+                          dataType="r8"
+                          name="Loan Repaid" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\IRLI Data Source\ILRI DATASET.Inputs[OLE DB Destination Input].ExternalColumns[Loan Duration(Months)]"
+                          dataType="wstr"
+                          length="255"
+                          name="Loan Duration(Months)" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\IRLI Data Source\ILRI DATASET.Inputs[OLE DB Destination Input].ExternalColumns[Interest Rate]"
+                          dataType="r8"
+                          name="Interest Rate" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\IRLI Data Source\ILRI DATASET.Inputs[OLE DB Destination Input].ExternalColumns[Loan_inception date]"
+                          dataType="dbTimeStamp"
+                          name="Loan_inception date" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\IRLI Data Source\ILRI DATASET.Inputs[OLE DB Destination Input].ExternalColumns[Months since last delinquent]"
+                          dataType="wstr"
+                          length="255"
+                          name="Months since last delinquent" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\IRLI Data Source\ILRI DATASET.Inputs[OLE DB Destination Input].ExternalColumns[CustomerId]"
+                          dataType="wstr"
+                          length="255"
+                          name="CustomerId" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\IRLI Data Source\ILRI DATASET.Inputs[OLE DB Destination Input].ExternalColumns[LoadDate]"
+                          dataType="dbTimeStamp"
+                          name="LoadDate" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\IRLI Data Source\ILRI DATASET.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\Sequence Container\IRLI Data Source\ILRI DATASET.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\IRLI Data Source\ILRI DATASET.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\IRLI Data Source\ILRI DATASET.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container\IRLI Data Source\ILRI DATASET.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\IRLI Data Source\ILRI DATASET.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Sequence Container\IRLI Data Source\IRLI CSV SOURCE"
+                  componentClassID="Microsoft.FlatFileSource"
+                  contactInfo="Flat File Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+                  description="Flat File Source"
+                  localeId="2057"
+                  name="IRLI CSV SOURCE"
+                  usesDispositions="true"
+                  version="1">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      description="Specifies whether zero-length columns are treated as null."
+                      name="RetainNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of an output column containing the file name. If no name is specified, no output column containing the file name will be generated."
+                      name="FileNameColumnName"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Sequence Container\IRLI Data Source\IRLI CSV SOURCE.Connections[FlatFileConnection]"
+                      connectionManagerID="{6EDC1233-0348-4312-952C-03E09C846FC3}:invalid"
+                      connectionManagerRefId="{6EDC1233-0348-4312-952C-03E09C846FC3}:invalid"
+                      name="FlatFileConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\IRLI Data Source\IRLI CSV SOURCE.Outputs[Flat File Source Output]"
+                      name="Flat File Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\IRLI Data Source\IRLI CSV SOURCE.Outputs[Flat File Source Output].Columns[EstimatedSalary]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\IRLI Data Source\IRLI CSV SOURCE.Outputs[Flat File Source Output].ExternalColumns[EstimatedSalary]"
+                          length="255"
+                          lineageId="Package\Sequence Container\IRLI Data Source\IRLI CSV SOURCE.Outputs[Flat File Source Output].Columns[EstimatedSalary]"
+                          name="EstimatedSalary"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\IRLI Data Source\IRLI CSV SOURCE.Outputs[Flat File Source Output].Columns[Loan type]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\IRLI Data Source\IRLI CSV SOURCE.Outputs[Flat File Source Output].ExternalColumns[Loan type]"
+                          length="255"
+                          lineageId="Package\Sequence Container\IRLI Data Source\IRLI CSV SOURCE.Outputs[Flat File Source Output].Columns[Loan type]"
+                          name="Loan type"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\IRLI Data Source\IRLI CSV SOURCE.Outputs[Flat File Source Output].Columns[LoanStatus]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\IRLI Data Source\IRLI CSV SOURCE.Outputs[Flat File Source Output].ExternalColumns[LoanStatus]"
+                          length="255"
+                          lineageId="Package\Sequence Container\IRLI Data Source\IRLI CSV SOURCE.Outputs[Flat File Source Output].Columns[LoanStatus]"
+                          name="LoanStatus"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\IRLI Data Source\IRLI CSV SOURCE.Outputs[Flat File Source Output].Columns[LoanTerm]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\IRLI Data Source\IRLI CSV SOURCE.Outputs[Flat File Source Output].ExternalColumns[LoanTerm]"
+                          length="255"
+                          lineageId="Package\Sequence Container\IRLI Data Source\IRLI CSV SOURCE.Outputs[Flat File Source Output].Columns[LoanTerm]"
+                          name="LoanTerm"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\IRLI Data Source\IRLI CSV SOURCE.Outputs[Flat File Source Output].Columns[Category]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\IRLI Data Source\IRLI CSV SOURCE.Outputs[Flat File Source Output].ExternalColumns[Category]"
+                          length="255"
+                          lineageId="Package\Sequence Container\IRLI Data Source\IRLI CSV SOURCE.Outputs[Flat File Source Output].Columns[Category]"
+                          name="Category"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\IRLI Data Source\IRLI CSV SOURCE.Outputs[Flat File Source Output].Columns[Loan Approved]"
+                          dataType="r8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\IRLI Data Source\IRLI CSV SOURCE.Outputs[Flat File Source Output].ExternalColumns[Loan Approved]"
+                          lineageId="Package\Sequence Container\IRLI Data Source\IRLI CSV SOURCE.Outputs[Flat File Source Output].Columns[Loan Approved]"
+                          name="Loan Approved"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\IRLI Data Source\IRLI CSV SOURCE.Outputs[Flat File Source Output].Columns[Loan Repaid]"
+                          dataType="r8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\IRLI Data Source\IRLI CSV SOURCE.Outputs[Flat File Source Output].ExternalColumns[Loan Repaid]"
+                          lineageId="Package\Sequence Container\IRLI Data Source\IRLI CSV SOURCE.Outputs[Flat File Source Output].Columns[Loan Repaid]"
+                          name="Loan Repaid"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\IRLI Data Source\IRLI CSV SOURCE.Outputs[Flat File Source Output].Columns[Loan Duration(Months)]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\IRLI Data Source\IRLI CSV SOURCE.Outputs[Flat File Source Output].ExternalColumns[Loan Duration(Months)]"
+                          length="255"
+                          lineageId="Package\Sequence Container\IRLI Data Source\IRLI CSV SOURCE.Outputs[Flat File Source Output].Columns[Loan Duration(Months)]"
+                          name="Loan Duration(Months)"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\IRLI Data Source\IRLI CSV SOURCE.Outputs[Flat File Source Output].Columns[Interest Rate]"
+                          dataType="r8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\IRLI Data Source\IRLI CSV SOURCE.Outputs[Flat File Source Output].ExternalColumns[Interest Rate]"
+                          lineageId="Package\Sequence Container\IRLI Data Source\IRLI CSV SOURCE.Outputs[Flat File Source Output].Columns[Interest Rate]"
+                          name="Interest Rate"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\IRLI Data Source\IRLI CSV SOURCE.Outputs[Flat File Source Output].Columns[Loan_inception date]"
+                          dataType="date"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\IRLI Data Source\IRLI CSV SOURCE.Outputs[Flat File Source Output].ExternalColumns[Loan_inception date]"
+                          lineageId="Package\Sequence Container\IRLI Data Source\IRLI CSV SOURCE.Outputs[Flat File Source Output].Columns[Loan_inception date]"
+                          name="Loan_inception date"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\IRLI Data Source\IRLI CSV SOURCE.Outputs[Flat File Source Output].Columns[Months since last delinquent]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\IRLI Data Source\IRLI CSV SOURCE.Outputs[Flat File Source Output].ExternalColumns[Months since last delinquent]"
+                          length="255"
+                          lineageId="Package\Sequence Container\IRLI Data Source\IRLI CSV SOURCE.Outputs[Flat File Source Output].Columns[Months since last delinquent]"
+                          name="Months since last delinquent"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\IRLI Data Source\IRLI CSV SOURCE.Outputs[Flat File Source Output].Columns[CustomerId]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\IRLI Data Source\IRLI CSV SOURCE.Outputs[Flat File Source Output].ExternalColumns[CustomerId]"
+                          length="255"
+                          lineageId="Package\Sequence Container\IRLI Data Source\IRLI CSV SOURCE.Outputs[Flat File Source Output].Columns[CustomerId]"
+                          name="CustomerId"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the data is in binary format."
+                              name="UseBinaryFormat">false</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\IRLI Data Source\IRLI CSV SOURCE.Outputs[Flat File Source Output].ExternalColumns[EstimatedSalary]"
+                          dataType="wstr"
+                          length="255"
+                          name="EstimatedSalary" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\IRLI Data Source\IRLI CSV SOURCE.Outputs[Flat File Source Output].ExternalColumns[Loan type]"
+                          dataType="wstr"
+                          length="255"
+                          name="Loan type" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\IRLI Data Source\IRLI CSV SOURCE.Outputs[Flat File Source Output].ExternalColumns[LoanStatus]"
+                          dataType="wstr"
+                          length="255"
+                          name="LoanStatus" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\IRLI Data Source\IRLI CSV SOURCE.Outputs[Flat File Source Output].ExternalColumns[LoanTerm]"
+                          dataType="wstr"
+                          length="255"
+                          name="LoanTerm" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\IRLI Data Source\IRLI CSV SOURCE.Outputs[Flat File Source Output].ExternalColumns[Category]"
+                          dataType="wstr"
+                          length="255"
+                          name="Category" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\IRLI Data Source\IRLI CSV SOURCE.Outputs[Flat File Source Output].ExternalColumns[Loan Approved]"
+                          dataType="r8"
+                          name="Loan Approved" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\IRLI Data Source\IRLI CSV SOURCE.Outputs[Flat File Source Output].ExternalColumns[Loan Repaid]"
+                          dataType="r8"
+                          name="Loan Repaid" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\IRLI Data Source\IRLI CSV SOURCE.Outputs[Flat File Source Output].ExternalColumns[Loan Duration(Months)]"
+                          dataType="wstr"
+                          length="255"
+                          name="Loan Duration(Months)" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\IRLI Data Source\IRLI CSV SOURCE.Outputs[Flat File Source Output].ExternalColumns[Interest Rate]"
+                          dataType="r8"
+                          name="Interest Rate" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\IRLI Data Source\IRLI CSV SOURCE.Outputs[Flat File Source Output].ExternalColumns[Loan_inception date]"
+                          dataType="date"
+                          name="Loan_inception date" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\IRLI Data Source\IRLI CSV SOURCE.Outputs[Flat File Source Output].ExternalColumns[Months since last delinquent]"
+                          dataType="wstr"
+                          length="255"
+                          name="Months since last delinquent" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\IRLI Data Source\IRLI CSV SOURCE.Outputs[Flat File Source Output].ExternalColumns[CustomerId]"
+                          dataType="wstr"
+                          length="255"
+                          name="CustomerId" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Sequence Container\IRLI Data Source\IRLI CSV SOURCE.Outputs[Flat File Source Error Output]"
+                      isErrorOut="true"
+                      name="Flat File Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\IRLI Data Source\IRLI CSV SOURCE.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                          codePage="1252"
+                          dataType="text"
+                          description="Flat File Source Error Output Column"
+                          lineageId="Package\Sequence Container\IRLI Data Source\IRLI CSV SOURCE.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                          name="Flat File Source Error Output Column" />
+                        <outputColumn
+                          refId="Package\Sequence Container\IRLI Data Source\IRLI CSV SOURCE.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\IRLI Data Source\IRLI CSV SOURCE.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container\IRLI Data Source\IRLI CSV SOURCE.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\IRLI Data Source\IRLI CSV SOURCE.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Sequence Container\IRLI Data Source.Paths[Derived Column Output]"
+                  endId="Package\Sequence Container\IRLI Data Source\ILRI DATASET.Inputs[OLE DB Destination Input]"
+                  name="Derived Column Output"
+                  startId="Package\Sequence Container\IRLI Data Source\Derived Column.Outputs[Derived Column Output]" />
+                <path
+                  refId="Package\Sequence Container\IRLI Data Source.Paths[Flat File Source Output]"
+                  endId="Package\Sequence Container\IRLI Data Source\Derived Column.Inputs[Derived Column Input]"
+                  name="Flat File Source Output"
+                  startId="Package\Sequence Container\IRLI Data Source\IRLI CSV SOURCE.Outputs[Flat File Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\TRUNCATE TABE ILRI DATASET"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{C64352A6-6810-4F0B-89DE-8E46C2887B1A}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="TRUNCATE TABE ILRI DATASET"
+          DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{6E144CDA-DDED-49BF-BD4F-8F05F49AF56D}"
+              SQLTask:SqlStatementSource="TRUNCATE TABLE [ILRI DATASET]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{D11A1E19-184C-48A3-A750-04CE2C2AD0D9}"
+          DTS:From="Package\Sequence Container\TRUNCATE TABE ILRI DATASET"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Sequence Container\IRLI Data Source" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="163,42"
+          Id="Package\Sequence Container\IRLI Data Source"
+          TopLeft="66.5,124.5" />
+        <NodeLayout
+          Size="247,42"
+          Id="Package\Sequence Container\TRUNCATE TABE ILRI DATASET"
+          TopLeft="22.5,15.5" />
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint]"
+          TopLeft="147,57.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,67"
+              Start="0,0"
+              End="0,59.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,59.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="294,231"
+          Size="294,274"
+          Id="Package\Sequence Container"
+          TopLeft="79,28" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Sequence Container\IRLI Data Source">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="175,42"
+          Id="Package\Sequence Container\IRLI Data Source\IRLI CSV SOURCE"
+          TopLeft="5.5,5.5" />
+        <NodeLayout
+          Size="153,42"
+          Id="Package\Sequence Container\IRLI Data Source\ILRI DATASET"
+          TopLeft="387,160" />
+        <NodeLayout
+          Size="158,42"
+          Id="Package\Sequence Container\IRLI Data Source\Derived Column"
+          TopLeft="203,90" />
+        <EdgeLayout
+          Id="Package\Sequence Container\IRLI Data Source.Paths[Derived Column Output]"
+          TopLeft="282,132">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="181.5,28"
+              Start="0,0"
+              End="181.5,20.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,10" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,10"
+                    Point2="0,14"
+                    Point3="4,14" />
+                  <mssgle:LineSegment
+                    End="177.5,14" />
+                  <mssgle:CubicBezierSegment
+                    Point1="177.5,14"
+                    Point2="181.5,14"
+                    Point3="181.5,18" />
+                  <mssgle:LineSegment
+                    End="181.5,20.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container\IRLI Data Source.Paths[Flat File Source Output]"
+          TopLeft="93,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="189,42.5"
+              Start="0,0"
+              End="189,35">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,17.25" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,17.25"
+                    Point2="0,21.25"
+                    Point3="4,21.25" />
+                  <mssgle:LineSegment
+                    End="185,21.25" />
+                  <mssgle:CubicBezierSegment
+                    Point1="185,21.25"
+                    Point2="189,21.25"
+                    Point3="189,25.25" />
+                  <mssgle:LineSegment
+                    End="189,35" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Sequence Container\IRLI Data Source\ILRI DATASET">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
